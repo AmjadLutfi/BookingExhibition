@@ -1,20 +1,23 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+// import './App.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import {Routes, Route, Router} from "react-router-dom"
 import { ToastContainer } from 'react-toastify';
 import BookingForm from './components/BookingForm';
+import HomePage from './components/HomePage'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <h1>Booking Form</h1>
-        <BookingForm />
-        <ToastContainer />
-      </div>
+      <Routes>
+        <Route path='/' element={<HomePage/>}/>
+        <Route path='/booking' element={<BookingForm />}/>
+      </Routes>
+      <ToastContainer />
     </>
   )
 }

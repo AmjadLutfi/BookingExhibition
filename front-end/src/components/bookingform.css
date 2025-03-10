@@ -1,0 +1,120 @@
+/* Background dengan gambar hitam putih */
+body {
+    background: url('https://source.unsplash.com/1600x900/?blackandwhite,abstract') no-repeat center center fixed;
+    background-size: cover;
+    padding-top: 0px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Styling card container */
+.card {
+    border-radius: 15px;
+    max-width: 600px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.card-title {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Styling form */
+label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+    color: #333;
+}
+
+/* Styling select dan input */
+select, input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Styling tombol sesi */
+.sessions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+    justify-items: center;
+}
+
+/* Tombol sesi */
+.sessions button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+}
+
+/* Warna hijau jika sesi dipilih */
+.sessions button.selected {
+    background-color: #28a745;
+}
+
+/* Jika sesi penuh */
+.sessions button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Styling form user */
+.user-form {
+    margin-top: 20px;
+}
+
+.user-form input {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.user-form button {
+    padding: 12px;
+    width: 100%;
+    background-color: gold;
+    color: black;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.user-form button:hover {
+    background-color: #d4af37;
+}
+
+.note {
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+    margin-bottom: 10px;
+}
