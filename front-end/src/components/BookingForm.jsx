@@ -82,7 +82,7 @@ const BookingForm = () => {
   //   );
   // }, [form, selectedSession]);
 
-  const isFormValid = division && department && date && selectedSession && form.employeeId && form.name && form.email;
+  const isFormValid = division && department && date && selectedSession && form.employeeId &&  form.employeeId.length > 6 && form.name && form.email;
 
   // Fungsi untuk menangani submit booking
   const handleSubmit = async (e) => {
@@ -92,7 +92,7 @@ const BookingForm = () => {
 
      if (!isFormValid) {
       console.log("Error nyaa dsasdas");
-      toast.error('Harap isi semua field sebelum submit.');
+      toast.error('Harap isi semua field dengan benar sebelum submit!');
       return;
     };
   
@@ -151,7 +151,9 @@ const BookingForm = () => {
                         {department && (
                           <>
                             <label>Pilih Tanggal:</label>
-                            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required/>
+                            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required
+                            min={new Date().toISOString().split("T")[0]}
+                            />
                           </>
                         )}
 
@@ -177,7 +179,10 @@ const BookingForm = () => {
                         {selectedSession && (
                           <div className="user-form">
                             <p className="note">Pastikan Noreg yang dimasukkan benar (minimal 7 digit, ex: 0212345)</p>
-                            <input type="text" placeholder="Noreg" value={form.employeeId} onChange={(e) => setForm({ ...form, employeeId: e.target.value })} />
+                            <input type="text" placeholder="Noreg" value={form.employeeId} onChange={(e) => setForm({ ...form, employeeId: e.target.value })} 
+                            className={form.employeeId.length > 0 && form.employeeId.length < 7 ? "input-error" : ""} />
+                            {form.employeeId.length > 0 && form.employeeId.length < 7 && (
+                            <p className="error-message">Noreg harus minimal 7 digit!</p>)}
                             <input type="text" placeholder="Nama" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
                             <input type="email" placeholder="Email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
                             <p className="note">Masukkan email pribadi/gmail, agar dapat menerima konfirmasi booking! <br></br> Cek email anda dan bawalah QRCode yang dikirim pada saat exhibition</p>
