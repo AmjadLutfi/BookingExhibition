@@ -1,0 +1,73 @@
+/* Background styling */
+body {
+    background: url('https://source.unsplash.com/1600x900/?modern,technology') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Styling utama */
+.card {
+    border-radius: 15px;
+    max-width: 650px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+/* Ucapan selamat */
+.success-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #28a745;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Tata letak QR Code & Info Booking */
+.booking-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    text-align: left;
+}
+
+.qr-container {
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+
+/* Informasi booking */
+.booking-details p {
+    font-size: 1.1rem;
+    margin: 5px 0;
+    color: #333;
+}
+
+/* Tombol kembali */
+.btn-back {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    font-size: 1.2rem;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-back:hover {
+    background: #0056b3;
+}
+
+.note {
+    font-size: 14px;
+    color: #ff0000;
+    text-align: center;
+    margin-bottom: 10px;
+}

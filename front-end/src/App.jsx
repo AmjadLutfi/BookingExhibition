@@ -6,7 +6,8 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import {Routes, Route, Router} from "react-router-dom"
 import { ToastContainer } from 'react-toastify';
 import BookingForm from './components/BookingForm';
-import HomePage from './components/HomePage'
+import HomePage from './components/HomePage';
+import ConfirmatioBooking from './components/ConfirmationBooking'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage/>}/>
         <Route path='/booking' element={<BookingForm />}/>
+        <Route path='/confirmbooking' element={<ConfirmatioBooking />}/>
       </Routes>
       <ToastContainer />
     </>

@@ -46,7 +46,7 @@ const BookingForm = () => {
     { time: '14:30 - 16:00', available: true },
   ]);
   const [selectedSession, setSelectedSession] = useState('');
-  const [form, setForm] = useState({ employeeId: '', name: '', email: '' });
+  const [form, setForm] = useState({ employeeId: '', name: '' });
   const navigate = useNavigate();
   // const [isFormValid, setIsFormValid] = useState(false);
 
@@ -82,7 +82,7 @@ const BookingForm = () => {
   //   );
   // }, [form, selectedSession]);
 
-  const isFormValid = division && department && date && selectedSession && form.employeeId &&  form.employeeId.length > 6 && form.name && form.email;
+  const isFormValid = division && department && date && selectedSession && form.employeeId &&  form.employeeId.length > 6 && form.name ;
 
   // Fungsi untuk menangani submit booking
   const handleSubmit = async (e) => {
@@ -109,8 +109,11 @@ const BookingForm = () => {
         date,
         session: selectedSession,
       });
-      toast.success('Booking berhasil! Silakan cek email Anda.');
-      setTimeout(() => navigate("/"), 2000);
+      toast.success('Booking berhasil! Jangan Lupa untuk Screenshoot atau simpan Bukti Booking Anda!');
+      // setTimeout(() => navigate("/"), 2000);
+      const bookingData = { division, department, date, selectedSession, ...form };
+      setTimeout(() => navigate('/confirmbooking', { state: bookingData }), 1000);
+
     } catch (err) {
       toast.error(err.response?.data?.message || 'Terjadi kesalahan.');
     }
@@ -184,8 +187,8 @@ const BookingForm = () => {
                             {form.employeeId.length > 0 && form.employeeId.length < 7 && (
                             <p className="error-message">Noreg harus minimal 7 digit!</p>)}
                             <input type="text" placeholder="Nama" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
-                            <input type="email" placeholder="Email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-                            <p className="note">Masukkan email pribadi/gmail, agar dapat menerima konfirmasi booking! <br></br> Cek email anda dan bawalah QRCode yang dikirim pada saat exhibition</p>
+                            {/* <input type="email" placeholder="Email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+                            <p className="note">Masukkan email pribadi/gmail, agar dapat menerima konfirmasi booking! <br></br> Cek email anda dan bawalah QRCode yang dikirim pada saat exhibition</p> */}
                             <button onClick={handleSubmit}>Submit</button>
                           </div>
                         )}
