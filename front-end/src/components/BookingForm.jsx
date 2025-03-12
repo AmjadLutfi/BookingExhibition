@@ -59,17 +59,21 @@ const BookingForm = () => {
 
   // Fetch ketersediaan sesi ketika tanggal dipilih
   useEffect(() => {
-    if (date) {
-      axios.get(`https://backendbooking-production.up.railway.app/api/slots?date=${date}`).then((res) => {
+    if (date && department) {
+      axios.get(`https://backendbooking-production.up.railway.app/api/slots?date=${date}&department=${encodeURIComponent(department)}`).then((res) => {
         const updatedSessions = sessions.map((session) => ({
           ...session,
-          available: res.data[session.time] > 0, // Jika slot tersedia, sesi tetap aktif
+          available: res.data[session.time]?.available || false,
+          departAvailable: res.data[session.time]?.deptRemaining > 0 // Jika slot tersedia, sesi tetap aktif
         }));
+        // console.log(date,"===> ini tanggal");
+        // console.log(department,"===> ini tanggal");
+        
         setSessions(updatedSessions);
         console.log(updatedSessions, "==> ini updated session");
       });
     }
-  }, [date]);
+  }, [date, department]);
 
   // useEffect(() => {
   //   // Perbarui validasi form setiap kali form atau session berubah
@@ -121,12 +125,12 @@ const BookingForm = () => {
 
   return (
     <>
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-10 col-md-12 col-sm-12">
-                <div class="card shadow-lg">
-                    <div class="card-body">
-                        <h3 class="card-title text-center mb-4">TMMIN Quality Exhibition 2025</h3>
+    <div className="container mt-5">
+        <div className="row justify-content-center">
+            <div className="col-lg-10 col-md-12 col-sm-12">
+                <div className="card shadow-lg">
+                    <div className="card-body">
+                        <h3 className="card-title text-center mb-4">TMMIN Quality Exhibition 2025</h3>
 
                         {/* Pilihan Divisi */}
                         <label>Pilih Divisi:</label>
@@ -161,7 +165,7 @@ const BookingForm = () => {
                         )}
 
 
-                        <p className="note">Silakan pilih sesi yang tersedia (sesi yang penuh akan berwarna abu-abu)</p>
+                        <p className="note1">Silakan pilih sesi yang tersedia (sesi yang penuh akan berwarna abu-abu) <br /> Kuota Setiap Department persesi Maksimal 3 Orang </p> 
                         {/* Pilihan Sesi */}
                         {date && (
                           <div className="sessions">                            
@@ -172,7 +176,7 @@ const BookingForm = () => {
                                 className={selectedSession === session.time ? 'selected' : ''}
                                 onClick={() => setSelectedSession(session.time)}
                               >
-                                {session.time} {session.available ? '' : '(Penuh)'}
+                                {session.time} {session.available ? '' : (session.departAvailable? '(Full)' : '(Dept. Full)' ) }
                               </button>
                             ))}
                           </div>
