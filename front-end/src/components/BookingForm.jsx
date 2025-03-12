@@ -47,6 +47,7 @@ const BookingForm = () => {
   ]);
   const [selectedSession, setSelectedSession] = useState('');
   const [form, setForm] = useState({ employeeId: '', name: '' });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   // const [isFormValid, setIsFormValid] = useState(false);
 
@@ -60,6 +61,7 @@ const BookingForm = () => {
   // Fetch ketersediaan sesi ketika tanggal dipilih
   useEffect(() => {
     if (date && department) {
+      setLoading(true);
       axios.get(`https://backendbooking-production.up.railway.app/api/slots?date=${date}&department=${encodeURIComponent(department)}`).then((res) => {
         const updatedSessions = sessions.map((session) => ({
           ...session,
@@ -70,6 +72,7 @@ const BookingForm = () => {
         // console.log(department,"===> ini tanggal");
         
         setSessions(updatedSessions);
+        setLoading(false);
         console.log(updatedSessions, "==> ini updated session");
       });
     }
@@ -167,7 +170,7 @@ const BookingForm = () => {
 
                         <p className="note1">Silakan pilih sesi yang tersedia (sesi yang penuh akan berwarna abu-abu) <br /> Kuota Setiap Department persesi Maksimal 3 Orang </p> 
                         {/* Pilihan Sesi */}
-                        {date && (
+                        {date && !loading && (
                           <div className="sessions">                            
                             {sessions.map((session) => (
                               <button
