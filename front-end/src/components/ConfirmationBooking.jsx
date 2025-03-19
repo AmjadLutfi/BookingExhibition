@@ -47,7 +47,7 @@ export default function ConfirmatioBooking(){
                             <br />
                             <p className="note">Screenshoot bukti booking ini atau simpan barcode diatas <br /> Dan bawalah bukti booking diatas pada saat exhibition !</p>
                             {/* Tombol kembali */}
-                            <button className="btn-back" onClick={() => navigate("/")}>
+                            <button className="btn-back" onClick={() => navigate("/booking")}>
                                 ⬅ Selesai
                             </button>
                         </div>
