@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './bookingform.css'
+import { FaSearch } from "react-icons/fa";
 
 
 const divisionsData = {
@@ -48,8 +49,23 @@ const BookingForm = () => {
   const [selectedSession, setSelectedSession] = useState('');
   const [form, setForm] = useState({ employeeId: '', name: '' });
   const [loading, setLoading] = useState(false);
+  const [isAlreadyBooked, setIsAlreadyBooked] = useState(false);
   const navigate = useNavigate();
   // const [isFormValid, setIsFormValid] = useState(false);
+
+
+  useEffect(() => {
+    if (form.employeeId.length >= 7) {
+      axios.get(`https://backendbooking-production.up.railway.app/api/check-booking?employeeId=${form.employeeId}`)
+        .then(() => {
+          setIsAlreadyBooked(false); 
+        })
+        .catch((err) => {
+          setIsAlreadyBooked(true);
+          // toast.error(err.response?.data?.message || 'Terjadi kesalahan.');
+        });
+    }
+  }, [form.employeeId]);
 
   useEffect(() => {
     if (division) {
@@ -96,8 +112,13 @@ const BookingForm = () => {
     e.preventDefault();
     console.log(isFormValid,"ini isform");
     
+    if (isAlreadyBooked) {
+      toast.error('Anda sudah pernah melakukan booking! Silahkan Cek Status Booking Anda');
+      return;
+    };
 
-     if (!isFormValid) {
+
+    if (!isFormValid) {
       console.log("Error nyaa dsasdas");
       toast.error('Harap isi semua field dengan benar sebelum submit!');
       return;
@@ -133,6 +154,12 @@ const BookingForm = () => {
             <div className="col-lg-10 col-md-12 col-sm-12">
                 <div className="card shadow-lg">
                     <div className="card-body">
+                        <button
+                          onClick={() => navigate('/statusbooking')}
+                          className="btn btn-sm btn-outline-warning position-absolute top-0 end-0 mt-2 me-2 d-flex align-items-center"
+                        >
+                          Cek Status <FaSearch className="me-0 ps-1" />  
+                        </button>
                         <h3 className="card-title text-center mb-4">TMMIN Quality Exhibition 2025</h3>
 
                         {/* Pilihan Divisi */}

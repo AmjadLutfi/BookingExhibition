@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import BookingForm from './components/BookingForm';
 import HomePage from './components/HomePage';
 import ConfirmatioBooking from './components/ConfirmationBooking'
+import StatusBooking from './components/StatusBooking'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,6 +19,7 @@ function App() {
         <Route path='/' element={<HomePage/>}/>
         <Route path='/booking' element={<BookingForm />}/>
         <Route path='/confirmbooking' element={<ConfirmatioBooking />}/>
+        <Route path='/statusbooking' element={<StatusBooking />}/>
       </Routes>
       <ToastContainer />
     </>
